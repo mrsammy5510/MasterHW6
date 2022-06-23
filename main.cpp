@@ -6,12 +6,28 @@ struct column
     int data;        //沒有data
     column* next;
 };
+int queue[5000] = {'\0'};
+int visited[5000] = {0};
+int front = 0;
+int rear = 0;
 
+void BFS(column* graph,int vertex)
+{
+    
+}
+void enqueue(int data)
+{
+
+}
+int dequeue(void)
+{
+    
+}
 int main()
 {
     const char* filename = "facebook_combined.txt";
     FILE* input_file = fopen(filename, "r");
-    int node, linking_node;
+    int node, linking_node,vertex=0;
     column graph [5000];
     column* current;
     if (!input_file)
@@ -23,13 +39,10 @@ int main()
     }
     char *contents = NULL;
     size_t len = 0;
-    /*while (getline(&contents, &len, input_file) != -1){
-        printf("%d %d", contents);
-    }*/
+
     while(fscanf(input_file, "%d %d", &node, &linking_node)!= -1)
     {
         current = &graph[node];
-        printf("%d",current->data);
         if(graph[node].data == -1) //還未寫入過連接點
         {
             graph[node].data = linking_node;
@@ -48,6 +61,7 @@ int main()
     }
     fclose(input_file);
     free(contents);
-
+    
+    BFS(graph,vertex);
     exit(EXIT_SUCCESS);
 }
