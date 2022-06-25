@@ -10,6 +10,7 @@ int queue[QUEUE_SIZE] = {'\0'};
 int visited[QUEUE_SIZE] = {0};
 int front = 0;
 int rear = 0;
+int order = 0;
 column* current;
 column graph [5000];
 
@@ -62,6 +63,31 @@ void BFS(int vertex)
         }
         
     }
+}
+void DFS(int vertex)
+{
+    order++;
+    column* current_dfs;
+    visited[vertex] = 1;
+    printf("%dth -> %d\n",order,vertex);
+    current_dfs = &graph[vertex];
+    while(current_dfs->data != -1)
+    {
+        if(visited[current_dfs->data] != 1)
+        {
+            DFS(current_dfs->data);
+        }
+        current_dfs = current_dfs->next;
+    }
+    return;
+}
+void clearvisited(void)             //清除visited array
+{
+    for(int i = 0;i<=4999;i++)
+    {
+        visited[i] = 0;
+    }
+    return;
 }
 int main()
 {
@@ -120,6 +146,8 @@ int main()
     free(contents);
     printf("輸入要做BFS和DFS的數字:");
     scanf("%d",&vertex);
-    BFS(vertex);
+    //BFS(vertex);
+    clearvisited();
+    DFS(vertex);
     exit(EXIT_SUCCESS);
 }
