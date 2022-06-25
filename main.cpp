@@ -48,8 +48,9 @@ void BFS(int vertex)
     enqueue(vertex);
     while(Isemptyqueue())
     {
+        order++;
         bfs_now = dequeue();
-        printf("%d ",bfs_now);
+        printf("%dth -> %d\n",order,bfs_now);
         current = &graph[bfs_now];
 
         while(current->data!=-1)
@@ -87,6 +88,7 @@ void clearvisited(void)             //清除visited array
     {
         visited[i] = 0;
     }
+    order = 0;
     return;
 }
 int main()
@@ -146,8 +148,10 @@ int main()
     free(contents);
     printf("輸入要做BFS和DFS的數字:");
     scanf("%d",&vertex);
-    //BFS(vertex);
+    BFS(vertex);
+    printf("BFS Done\n\n");
     clearvisited();
     DFS(vertex);
+    printf("DFS Done\n\n");
     exit(EXIT_SUCCESS);
 }
